@@ -8,11 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+        }
+        #copyButton {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
         }
         #message {
             font-size: 18px;
@@ -26,28 +37,34 @@
     </style>
 </head>
 <body>
+    <button id="copyButton">複製文字</button>
     <div id="message">文字「hello Eason」已複製到剪貼簿</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var text = "hello Eason";
-            
-            // 創建一個臨時的文本區域元素
-            var tempTextArea = document.createElement("textarea");
-            tempTextArea.value = text;
-            
-            // 將臨時元���添加到文檔中
-            document.body.appendChild(tempTextArea);
-            
-            // 在 iOS 上，我們需要選中文本並使用 document.execCommand 來複製
-            tempTextArea.select();
-            document.execCommand("copy");
-            
-            // 移除臨時元素
-            document.body.removeChild(tempTextArea);
-            
-            // 顯示成功訊息
-            document.getElementById('message').style.display = 'block';
+            var copyButton = document.getElementById('copyButton');
+            var message = document.getElementById('message');
+
+            copyButton.addEventListener('click', function() {
+                var text = "hello Eason";
+                
+                // 創建一個臨時的文本區域元素
+                var tempTextArea = document.createElement("textarea");
+                tempTextArea.value = text;
+                
+                // 將臨時元素添加到文檔中
+                document.body.appendChild(tempTextArea);
+                
+                // 在 iOS 上，我們需要選中文本並使用 document.execCommand 來複製
+                tempTextArea.select();
+                document.execCommand("copy");
+                
+                // 移除臨時元素
+                document.body.removeChild(tempTextArea);
+                
+                // 顯示成功訊息
+                message.style.display = 'block';
+            });
         });
     </script>
 </body>
