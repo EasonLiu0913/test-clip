@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製 hello Eason</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #message {
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="message">文字「hello Eason」已複製到剪貼簿</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var text = "hello Eason";
+            
+            // 創建一個臨時的文本區域元素
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
+            
+            // 將臨時元���添加到文檔中
+            document.body.appendChild(tempTextArea);
+            
+            // 在 iOS 上，我們需要選中文本並使用 document.execCommand 來複製
+            tempTextArea.select();
+            document.execCommand("copy");
+            
+            // 移除臨時元素
+            document.body.removeChild(tempTextArea);
+            
+            // 顯示成功訊息
+            document.getElementById('message').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
